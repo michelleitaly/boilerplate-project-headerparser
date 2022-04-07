@@ -31,3 +31,12 @@ app.get("/api/hello", function (req, res) {
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+let jsonObject = {};
+app.enable('trust proxy')
+app.get("/api/whoami", (req, res)=>{
+  jsonObject["ipaddress"] =req.ip;
+  jsonObject["language"]=req.get(" Accept-Language") ;
+  jsonObject["software"]= req.get("User-Agent") ;
+  res.json(jsonObject);
+} )
