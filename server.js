@@ -36,7 +36,10 @@ let jsonObject = {};
 app.enable('trust proxy')
 app.get("/api/whoami", (req, res)=>{
   jsonObject["ipaddress"] =req.ip;
-  jsonObject["language"]=req.get(" Accept-Language") ;
+  jsonObject["language"]=req.headers["accept-language"] ;
+  //the same:
+  //jsonObject["language"]=req.get("Accept-Language") ;
+  console.log(jsonObject["language"]);
   jsonObject["software"]= req.get("User-Agent") ;
   res.json(jsonObject);
 } )
